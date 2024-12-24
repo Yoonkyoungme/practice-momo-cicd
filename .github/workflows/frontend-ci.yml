@@ -60,6 +60,7 @@ jobs:
         run: npm ci
 
       - name: Chromatic을 실행해요 :)
+        working-directory: ./frontend
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
