@@ -62,7 +62,7 @@ jobs:
       - name: Chromatic을 실행해요 :)
         uses: chromaui/action@latest
         with:
-          workingDir: ./frontend
+          workingDir: frontend
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
 
