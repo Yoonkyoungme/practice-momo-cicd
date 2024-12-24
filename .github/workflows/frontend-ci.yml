@@ -45,7 +45,7 @@ jobs:
         with:
           node-version: 'lts/*'
 
-      - name: 이전 의존성을 저장해둔게 있나~? 확인해요 :)
+      - name: 의존성 캐시를 확인해요 :)
         id: cache
         uses: actions/cache@v4
         with:
@@ -60,9 +60,9 @@ jobs:
         run: npm ci
 
       - name: Chromatic을 실행해요 :)
-        working-directory: ./frontend
         uses: chromaui/action@latest
         with:
+          workingDir: ./frontend
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
 
