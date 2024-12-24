@@ -59,23 +59,23 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
-      - name: RTL을 실행해요 :)
-        run: npm run test -- --passWithNoTests
-
       - name: Chromatic을 실행해요 :)
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
 
-      - name: 테스트 결과를 PR에 코멘트로 등록해요 :)
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          files: frontend/reports/**/*.xml
-
       - name: Storybook URL을 PR에 코멘트로 등록해요 :)
         uses: thollander/actions-comment-pull-request@v3
         with:
           message: |
             💄 Storybook: ${{ steps.chromatic.outputs.storybookUrl }}
+
+      - name: RTL을 실행해요 :)
+        run: npm run test -- --passWithNoTests
+
+      - name: 테스트 결과를 PR에 코멘트로 등록해요 :)
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: frontend/reports/**/*.xml
