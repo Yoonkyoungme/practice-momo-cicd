@@ -61,10 +61,10 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
-      - name: Chromatic을 실행해요 :)
+      - name: Chromatic에 배포해요 :)
+        id: publish_chromatic
         uses: chromaui/action@latest
         with:
-          workingDir: frontend
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
 
@@ -73,6 +73,7 @@ jobs:
         with:
           message: |
             💄 Storybook: ${{ steps.chromatic.outputs.storybookUrl }}
+            💄 Storybook: ${{ steps.publish_chromatic.outputs.storybookUrl }}
 
       - name: RTL을 실행해요 :)
         run: npm run test -- --passWithNoTests
