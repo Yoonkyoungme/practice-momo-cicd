@@ -66,6 +66,7 @@ jobs:
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          buildScriptName: build-storybook
           onlyChanged: true
 
       - name: Storybook URL을 PR에 코멘트로 등록해요 :)
