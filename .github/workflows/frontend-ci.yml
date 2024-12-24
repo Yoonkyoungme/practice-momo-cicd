@@ -39,6 +39,8 @@ jobs:
     steps:
       - name: 모모 레파지토리의 코드를 가져와요 :)
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: 노드 버젼을 설정해요 :)
         uses: actions/setup-node@v4
