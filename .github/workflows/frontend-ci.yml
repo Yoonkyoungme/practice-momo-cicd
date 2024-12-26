@@ -16,6 +16,7 @@ jobs:
     outputs:
       backend: ${{ steps.filter.outputs.backend }}
       frontend: ${{ steps.filter.outputs.frontend }}
+      storybook: ${{ steps.filter.outputs.storybook }}
     steps:
       - uses: dorny/paths-filter@v3
         id: filter
@@ -25,6 +26,9 @@ jobs:
               - 'backend/**'
             frontend:
               - 'frontend/**'
+            storybook:
+              - 'frontend/stories/**'
+              - 'frontend/.storybook/**'
           list-files: 'csv'
 
   fe-test:
@@ -42,7 +46,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 노드 버젼을 설정해요 :)
+      - name: 노드 버전을 설정해요 :)
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
@@ -62,6 +66,7 @@ jobs:
         run: npm ci
 
       - name: Chromatic에 배포해요 :)
+        if: ${{ needs.detect-changes.outputs.storybook == 'true' }}
         id: publish_chromatic
         uses: chromaui/action@latest
         with:
@@ -70,6 +75,7 @@ jobs:
           onlyChanged: true
 
       - name: Storybook URL을 PR에 코멘트로 등록해요 :)
+        if: ${{ needs.detect-changes.outputs.storybook == 'true' }}
         uses: thollander/actions-comment-pull-request@v3
         with:
           message: |
