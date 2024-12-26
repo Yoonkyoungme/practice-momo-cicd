@@ -7,7 +7,6 @@ import TimeRangeSelector from '.';
 const meta = {
   title: 'Components/TimeRangeSelector',
   component: TimeRangeSelector,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
