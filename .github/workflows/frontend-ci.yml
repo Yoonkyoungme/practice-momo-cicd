@@ -27,8 +27,9 @@ jobs:
             frontend:
               - 'frontend/**'
             storybook:
-              - 'frontend/stories/**'
               - 'frontend/.storybook/**'
+              - 'frontend/**/*.stories.*'
+              - 'frontend/**/*.story.*'
           list-files: 'csv'
 
   fe-test:
