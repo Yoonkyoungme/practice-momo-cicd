@@ -39,3 +39,10 @@ export const WithValue: Story = {
     value: '기본 텍스트',
   },
 };
+
+export const Password: Story = {
+  args: {
+    type: 'password',
+    placeholder: '비밀번호를 입력하세요.',
+  },
+};
