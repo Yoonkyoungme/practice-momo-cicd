@@ -6,8 +6,6 @@ import Calendar from './index';
 const meta = {
   title: 'Components/Calendar',
   component: Calendar,
-  tags: ['autodocs'],
-
   parameters: {
     layout: 'centered',
   },

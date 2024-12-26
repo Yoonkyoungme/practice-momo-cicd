@@ -6,7 +6,6 @@ import ToggleButton from './index';
 const meta = {
   title: 'Components/ToggleButton',
   component: ToggleButton,
-  tags: ['autodocs'],
   decorators: [
     (Story, context) => {
       const [{ isToggled }, setArgState] = useArgs();
