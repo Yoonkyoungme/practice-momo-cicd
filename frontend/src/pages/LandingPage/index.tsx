@@ -28,7 +28,7 @@ export default function LandingPage() {
       <div css={s_container}>
         <ComponentCarousel slides={slides} />
         <BottomFixedButton onClick={() => routeTo(MEETING_CREATE_PATH)}>
-          왜 스크립트가 안 돌아갈까
+          약속 생성하자 ~~
         </BottomFixedButton>
       </div>
     </ContentLayout>
