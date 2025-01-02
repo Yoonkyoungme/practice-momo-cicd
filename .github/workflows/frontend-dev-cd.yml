@@ -76,11 +76,6 @@ jobs:
     env:
       CLOUDFRONT_DISTRIBUTION_ID_DEV: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
     steps:
-      - name: 기존 dist 폴더 내부에 있던 이전 버전의 dist 폴더 내부 모든 파일을 삭제해요 :)
-        working-directory: ./frontend/
-        run: |
-          rm -rf dist/*
-
       - name: 모모 깃허브 레파지토리 artifacts로부터 빌드 결과물을 다운받아요 :)
         uses: actions/download-artifact@v4
         with:
