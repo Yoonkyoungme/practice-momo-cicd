@@ -72,7 +72,7 @@ jobs:
 
   deploy:
     needs: fe-build
-    runs-on: ubunt-lastes
+    runs-on: self-hosted
     env:
       CLOUDFRONT_DISTRIBUTION_ID_DEV: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
     steps:
