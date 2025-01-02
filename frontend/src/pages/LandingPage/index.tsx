@@ -27,7 +27,9 @@ export default function LandingPage() {
     <ContentLayout>
       <div css={s_container}>
         <ComponentCarousel slides={slides} />
-        <BottomFixedButton onClick={() => routeTo(MEETING_CREATE_PATH)}>테스트</BottomFixedButton>
+        <BottomFixedButton onClick={() => routeTo(MEETING_CREATE_PATH)}>
+          DEV CD 테스트
+        </BottomFixedButton>
       </div>
     </ContentLayout>
   );
