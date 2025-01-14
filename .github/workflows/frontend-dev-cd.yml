@@ -2,7 +2,7 @@ name: 모모 프론트엔드 배포 자동화 워크플로우(dev)
 
 on:
   push:
-    branches: ['develop']
+    branches: ['chore/cd']
 
 permissions:
   checks: write
@@ -86,5 +86,5 @@ jobs:
 
       - name: aws에 배포하고 cloudfront 캐싱을 무효화해요 :)
         run: |
-          aws s3 sync ./ s3://momo-fe-s3/momo-fe-test/ --delete
+          aws s3 sync ./frontend/dist/ s3://momo-fe-s3/momo-fe-test/ --delete
           aws cloudfront create-invalidation --distribution-id "$CLOUDFRONT_DISTRIBUTION_ID_DEV" --paths "/*"
