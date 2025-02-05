@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Input from './index';
 
 const meta = {
-  title: 'Components/Inputs/BaseInput',
+  title: 'Components/Inputs/TestInputs',
   component: Input,
   argTypes: {
     type: { control: 'text' },
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     type: 'text',
-    placeholder: '텍스트를 입력하세요.',
+    placeholder: '테스트',
   },
 };
 
@@ -37,12 +37,5 @@ export const WithValue: Story = {
     type: 'text',
     placeholder: '미리 채워진 텍스트',
     value: '기본 텍스트',
-  },
-};
-
-export const Password: Story = {
-  args: {
-    type: 'password',
-    placeholder: '비밀번호를 입력하세요.',
   },
 };

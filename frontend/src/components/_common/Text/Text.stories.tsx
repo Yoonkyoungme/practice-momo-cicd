@@ -7,7 +7,6 @@ import Text from './';
 const meta = {
   title: 'Components/Text',
   component: Text,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },

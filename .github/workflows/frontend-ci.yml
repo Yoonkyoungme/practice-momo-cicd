@@ -16,6 +16,7 @@ jobs:
     outputs:
       backend: ${{ steps.filter.outputs.backend }}
       frontend: ${{ steps.filter.outputs.frontend }}
+      storybook: ${{ steps.filter.outputs.storybook }}
     steps:
       - uses: dorny/paths-filter@v3
         id: filter
@@ -25,6 +26,10 @@ jobs:
               - 'backend/**'
             frontend:
               - 'frontend/**'
+            storybook:
+              - 'frontend/.storybook/**'
+              - 'frontend/**/*.stories.*'
+              - 'frontend/**/*.story.*'
           list-files: 'csv'
 
   fe-test:
@@ -39,13 +44,15 @@ jobs:
     steps:
       - name: 모모 레파지토리의 코드를 가져와요 :)
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: 노드 버젼을 설정해요 :)
+      - name: 노드 버전을 설정해요 :)
         uses: actions/setup-node@v4
         with:
           node-version: 'lts/*'
 
-      - name: 이전 의존성을 저장해둔게 있나~? 확인해요 :)
+      - name: 의존성 캐시를 확인해요 :)
         id: cache
         uses: actions/cache@v4
         with:
@@ -59,10 +66,26 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
+      - name: Chromatic에 배포해요 :)
+        if: ${{ needs.detect-changes.outputs.storybook == 'true' }}
+        id: publish_chromatic
+        uses: chromaui/action@latest
+        with:
+          workingDir: ./frontend
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          onlyChanged: true
+
+      - name: Storybook URL을 PR에 코멘트로 등록해요 :)
+        if: ${{ needs.detect-changes.outputs.storybook == 'true' }}
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          message: |
+            💄 Storybook: ${{ steps.publish_chromatic.outputs.storybookUrl }}
+
       - name: RTL을 실행해요 :)
         run: npm run test -- --passWithNoTests
 
-      - name: 테스트 결과를 PR에 코멘트로 등록해요 :)
+      - name: 테스트 결과를 PR에 코멘트로 등록해요 :) :)
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:

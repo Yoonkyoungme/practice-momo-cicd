@@ -12,7 +12,6 @@ import Dropdown from '.';
 const meta = {
   title: 'Components/Dropdown',
   component: Dropdown,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },
